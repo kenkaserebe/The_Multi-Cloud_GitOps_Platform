@@ -71,7 +71,7 @@ terraform {
         use_lockfile    = true         # Enables s3 native locking (Terraform 1.11+)
     }
 }
-
+```
 
 #### Variables
 
