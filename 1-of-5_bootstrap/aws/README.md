@@ -9,9 +9,9 @@ When managing infrastructure with Terraform, a remote backend (like S3) is recom
 ## Features
 
 - Creates an S3 bucket with a globally unique name (provided by you)
-- Enables **bucket versioning** - recover from accidental deletions or corruption
-- Enforces **server-side encryption** (AES-256) - protects sensitive data
-- Blocks **all public access** - ensures bucket is private
+- Enables ```bucket versioning``` - recover from accidental deletions or corruption
+- Enforces ```server-side encryption``` (AES-256) - protects sensitive data
+- Blocks ```all public access``` - ensures bucket is private
 - Uses local Terraform state for the bootstrap itself (no backend configuration)
 
 ## Prerequisites
@@ -91,18 +91,18 @@ bucket_name                 Name of the created S3 bucket
 bucket_arn                  ARN of the created S3 bucket
 
 
-##### Cleanup
+### Cleanup
 
 If you no longer need the bucket (e.g. during development/testing), you can destroy it:
 
-bash
+```bash
 terraform destroy
-
+```
 
 Note: force_destroy = true is set on the bucket, so it will delete even if it contains objects. For production, you should remove this flag and manage deletion carefully.
 
 
-##### Security
+### Security
 
 - Bucket encryption is enabled with AES-256
 - Public access is fully blocked.
