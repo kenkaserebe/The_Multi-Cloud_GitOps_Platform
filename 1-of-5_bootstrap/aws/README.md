@@ -37,28 +37,37 @@ Important: The bucket_name must be globally unique across all of AWS
 
 ### 2. Initialize and apply
 
-bash
+```bash
 terraform init
-terraform plan      # review what will be created
-terraform apply     # create the bucket
 
+terraform plan      # review what will be created
+
+terraform apply     # create the bucket
+```
 
 ### 3. Outputs
 
 After apply, Terraform will output:
-
+```
 bucket_name - name of the created bucket
-bucket_arn - ARN of the bucket
 
+bucket_arn - <ARN-of-the-bucket>
+```
 Use these values when configuring your other Terraform projects' backend:
 
-hcl
+```hcl
 terraform {
+
     backend "s3" {
+
         bucket          = "your-unique-state-bucket-name"
+
         key             = "path/to/your/terraform.tfstate"
+
         region          = "us-east-1"
+
         encrypt         = true
+
         use_lockfile    = true         # Enables s3 native locking (Terraform 1.11+)
     }
 }
@@ -66,12 +75,11 @@ terraform {
 
 #### Variables
 
-Name            Description                             Type            Required
+|Name          |Description                                         |Type             |Required |
 
-region          AWS region where the bucket             string          yes
-                will be created
-        
-bucket_name     Globally unique S3 bucket name          string          yes
+|region        |AWS region where the bucket will be created         |string           |yes
+                     
+|bucket_name   |Globally unique S3 bucket name                      |string           |yes
 
 
 #### Outputs
