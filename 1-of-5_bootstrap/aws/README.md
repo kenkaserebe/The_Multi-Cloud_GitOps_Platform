@@ -74,22 +74,22 @@ terraform {
 ```
 
 #### Variables
+```
+Name        Description                                  Type    Required 
 
-|Name        |Description                                  |Type    |Required |
-
-|region      |AWS region where the bucket will be created  |string  |yes      |
+region      AWS region where the bucket will be created  string  yes      
                     
-|bucket_name |Globally unique S3 bucket name               |string  |yes      |
-
+bucket_name Globally unique S3 bucket name               string  yes      
+```
 
 #### Outputs
-
+```
 Name                        Description
 
 bucket_name                 Name of the created S3 bucket
 
 bucket_arn                  ARN of the created S3 bucket
-
+```
 
 ### Cleanup
 
