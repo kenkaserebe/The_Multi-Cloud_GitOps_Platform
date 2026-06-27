@@ -75,11 +75,11 @@ terraform {
 
 #### Variables
 ```
-Name        Description                                  Type    Required 
+Name            Description                                     Type        Required 
 
-region      AWS region where the bucket will be created  string  yes      
+region          AWS region where the bucket will be created     string      yes      
                     
-bucket_name Globally unique S3 bucket name               string  yes      
+bucket_name     Globally unique S3 bucket name                  string      yes      
 ```
 
 #### Outputs
