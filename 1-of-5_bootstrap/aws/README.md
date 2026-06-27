@@ -29,6 +29,7 @@ Create a terraform.tfvars file (or use environment variables) with the required 
 
 hcl
 region      = "us-east-1"
+
 bucket_name = "your-unique-state-bucket-name"
 
 Important: The bucket_name must be globally unique across all of AWS
