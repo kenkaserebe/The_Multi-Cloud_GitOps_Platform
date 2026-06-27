@@ -27,11 +27,11 @@ When managing infrastructure with Terraform, a remote backend (like S3) is recom
 
 Create a terraform.tfvars file (or use environment variables) with the required inputs:
 
-hcl
+```hcl
 region      = "us-east-1"
 
 bucket_name = "your-unique-state-bucket-name"
-
+```
 Important: The bucket_name must be globally unique across all of AWS
 
 
