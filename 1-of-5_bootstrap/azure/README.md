@@ -63,13 +63,9 @@ Use these values when configuring your other Terraform projects' backend:
 terraform {
 
     backend "azurerm" {
-
         resource_group_name     = "terraform-state-rg"
-
         storage_account_name    = "tfstateuniquesa123"
-
         container_name          = "tfstate"
-
         key                     = "path/to/your/terraform.tfstate"
     }
 }

@@ -59,15 +59,10 @@ Use these values when configuring your other Terraform projects' backend:
 terraform {
 
     backend "s3" {
-
         bucket          = "your-unique-state-bucket-name"
-
         key             = "path/to/your/terraform.tfstate"
-
         region          = "us-east-1"
-
         encrypt         = true
-
         use_lockfile    = true         # Enables s3 native locking (Terraform 1.11+)
     }
 }
