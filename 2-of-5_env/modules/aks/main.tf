@@ -4,7 +4,7 @@
 resource "azurerm_virtual_network" "this" {
   name                  = "${var.az_cluster_name}-vnet"
   location              = var.az_location
-  resource_group_name   = var.az_resources_group_name
+  resource_group_name   = var.az_resource_group_name
   address_space         = var.az_vnet_address_space
   tags                  = var.az_tags
 }
@@ -12,7 +12,7 @@ resource "azurerm_virtual_network" "this" {
 # Subnet for AKS nodes
 resource "azurerm_subnet" "aks" {
   name                  = "${var.az_cluster_name}-subnet"
-  resource_group_name   = var.az_resources_group_name
+  resource_group_name   = var.az_resource_group_name
   virtual_network_name  = azurerm_virtual_network.this.name
   address_prefixes      = var.az_subnet_address_prefixes
 }
@@ -21,7 +21,7 @@ resource "azurerm_subnet" "aks" {
 resource "azurerm_kubernetes_cluster" "this" {
   name                  = var.az_cluster_name
   location              = var.az_location
-  resource_group_name   = var.az_resources_group_name
+  resource_group_name   = var.az_resource_group_name
   dns_prefix            = var.az_dns_prefix != "" ? var.az_dns_prefix : var.az_cluster_name
   kubernetes_version    = var.az_kubernetes_version
 
@@ -50,7 +50,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     network_plugin  = "kubenet"
     network_policy  = "calico"
     service_cidr    = "10.0.0.0/16"
-    dns_service_ip  = "10.0.0.0"
+    dns_service_ip  = "10.0.0.10"
   }
 
   # Enable RBAC

@@ -5,7 +5,7 @@ variable "az_location" {
   type          = string
 }
 
-variable "az_resources_group_name" {
+variable "az_resource_group_name" {
   description   = "Resource group name"
   type          = string
 }

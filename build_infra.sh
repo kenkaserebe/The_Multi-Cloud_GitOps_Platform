@@ -66,26 +66,26 @@ resource_group_name  = "$RESOURCE_GROUP"
 storage_account_name = "$STORAGE_ACCOUNT"
 container_name       = "$CONTAINER_NAME"
 key                  = "aks-cluster/terraform.tfstate"
-# Do NOT put access_key here – use -backend-config or environment variable
+# Do NOT put access_key here; use -backend-config or environment variable
 EOF
 
 # ------------------------------------------------------------
 # 5. Run Terraform for the environment modules
 # ------------------------------------------------------------
 echo "=== Creating AWS environment ==="
-cd 2-of-5_env/aws
+pushd 2-of-5_env/aws > /dev/null
 terraform init -backend-config=backend.tfvars
 terraform apply -auto-approve
-cd - > /dev/null
+popd > /dev/null
 
 echo "=== Creating Azure environment ==="
 # For Azure, you can either:
 # - Use the access_key via environment variable: ARM_ACCESS_KEY
 # - Or pass it via -backend-config on the init command
 export ARM_ACCESS_KEY="$ACCESS_KEY"
-cd 2-of-5_env/azure
+pushd 2-of-5_env/azure > /dev/null
 terraform init -backend-config=backend.tfvars
 terraform apply -auto-approve
-cd - > /dev/null
+popd > /dev/null
 
 echo "All environments created successfully!"
