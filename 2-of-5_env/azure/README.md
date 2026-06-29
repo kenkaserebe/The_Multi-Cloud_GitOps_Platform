@@ -1,5 +1,3 @@
-# multi-cloud-gitops-platform/environments/azure/README.md
-
 # Azure Environment - AKS Cluster & Infrastructure
 
 This Terraform configuration deploys a complete Azure Kubernetes Service (AKS) cluster on Azure, including a virtual network, subnet, system-assigned managed identity, and an Azure Container Registry (ACR). The AKS logic is encapsulated in a reusable module (`modules/aks`), and the environment state is stored remotely in an Azure Storage blob container.

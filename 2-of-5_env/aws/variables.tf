@@ -1,4 +1,4 @@
-# multi-cloud-gitops-platform/environments/aws/variables.tf
+# The_Multi-Cloud_GitOps_Platform/2-of-5_env/aws/variables.tf
 
 
 variable "aws_region" {

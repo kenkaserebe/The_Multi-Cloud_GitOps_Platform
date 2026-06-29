@@ -1,4 +1,4 @@
-# multi-cloud-gitops-platform/environments/azure/main.tf
+# The_Multi-Cloud_GitOps_Platform/2-of-5_env/azure/main.tf
 
 resource "azurerm_resource_group" "this" {
   name      = var.az_resource_group_name

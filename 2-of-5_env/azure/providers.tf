@@ -1,4 +1,4 @@
-# multi-cloud-gitops-platform/environments/azure/providers.tf
+# The_Multi-Cloud_GitOps_Platform/2-of-5_env/azure/providers.tf
 
 
 terraform {
