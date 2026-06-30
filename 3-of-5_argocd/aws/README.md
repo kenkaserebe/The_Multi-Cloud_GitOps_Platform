@@ -10,21 +10,21 @@ ArgoCD is a GitOps continuous delivery tool for Kubernetes. This module automate
 
 - Installs ArgoCD using the Helm chart from `https://argoproj.github.io/argo-helm`
 - Creates a dedicated `argocd` namespace
-- Configures the ArgoCD server service as a **LoadBalancer** (accessible via a public hostname)
+- Configures the ArgoCD server service as a `LoadBalancer` (accessible via a public hostname)
 - Enables insecure HTTP access (for simplicity - see security note below)
 - Retrieves the initial admin password and saves it to a local file (`argocd-password.txt`)
 - Provides output commands to get the LoadBalancer hostname and password
-- **Remote state** - Terraform state is stored in an S3 bucket (must exist before use)
+- `Remote state` - Terraform state is stored in an S3 bucket (must exist before use)
 
 ## Prerequisites
 
-- **Existing EKS cluster** - you must have a running EKS cluster. You can create one using the [bootstrap/aws](../bootstrap/aws) module or any other method.
-- **Terraform** (v1.14+)
-- **kubectl** (optional, for manual fallback)
-- **AWS CLI** - configured with credentials that have access to:
+- `Existing EKS cluster` - you must have a running EKS cluster. You can create one using the [bootstrap/aws](../bootstrap/aws) module or any other method.
+- `Terraform` (v1.14+)
+- `kubectl` (optional, for manual fallback)
+- `AWS CLI` - configured with credentials that have access to:
     - The EKS cluster (`eks:DescribeCluster`)
     - The S3 bucket used for Terraform state (`s3:GetObject`, `s3:PutObject`, etc.)
-- **Helm** (not required locally; the Terraform Helm provider handles everything)
+- `Helm` (not required locally; the Terraform Helm provider handles everything)
 
 ## Required AWS Permissions
 
