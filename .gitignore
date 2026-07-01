@@ -44,3 +44,9 @@ argocd-password.txt
 
 # Backend storage file
 backend.hcl
+
+# Configuration outputs
+environment_outputs.txt
+
+# kubectl commands
+kubectl_file.txt

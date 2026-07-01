@@ -9,9 +9,9 @@ AWS_MODULE_PATH="1-of-5_bootstrap/aws"
 terraform -chdir="$AWS_MODULE_PATH" init
 terraform -chdir="$AWS_MODULE_PATH" apply  --auto-approve
 
-AWS_OUTPUTS=$(terraform -chdir="$AWS_MODULE_PATH" output -json)
-BUCKET_NAME=$(echo "$AWS_OUTPUTS" | jq -r '.bucket_name.value')
-BUCKET_REGION=$(echo "$AWS_OUTPUTS" | jq -r '.region.value')
+# Extract values using -raw
+BUCKET_NAME=$(terraform -chdir="$AWS_MODULE_PATH" output -raw bucket_name)
+BUCKET_REGION=$(terraform -chdir="$AWS_MODULE_PATH" output -raw region)
 
 echo "AWS bootstrap complete. Bucket: $BUCKET_NAME, Region: $BUCKET_REGION"
 
@@ -24,11 +24,10 @@ AZURE_MODULE_PATH="1-of-5_bootstrap/azure"
 terraform -chdir="$AZURE_MODULE_PATH" init
 terraform -chdir="$AZURE_MODULE_PATH" apply  --auto-approve
 
-AZURE_OUTPUTS=$(terraform -chdir="$AZURE_MODULE_PATH" output -json)
-RESOURCE_GROUP=$(echo "$AZURE_OUTPUTS" | jq -r '.resource_group_name.value')
-STORAGE_ACCOUNT=$(echo "$AZURE_OUTPUTS" | jq -r '.storage_account_name.value')
-CONTAINER_NAME=$(echo "$AZURE_OUTPUTS" | jq -r '.container_name.value')
-ACCESS_KEY=$(echo "$AZURE_OUTPUTS" | jq -r '.access_key.value')
+RESOURCE_GROUP=$(terraform -chdir="$AZURE_MODULE_PATH" output -raw resource_group_name)
+STORAGE_ACCOUNT=$(terraform -chdir="$AZURE_MODULE_PATH" output -raw storage_account_name)
+CONTAINER_NAME=$(terraform -chdir="$AZURE_MODULE_PATH" output -raw container_name)
+ACCESS_KEY=$(terraform -chdir="$AZURE_MODULE_PATH" output -raw access_key 2>/dev/null)
 
 echo "Azure bootstrap complete. Resource Group: $RESOURCE_GROUP, Storage: $STORAGE_ACCOUNT"
 
@@ -65,9 +64,8 @@ EOF
 )
 
 # Capture EKS outputs and write them to a file for ArgoCD
-EKS_OUTPUTS=$(terraform -chdir=2-of-5_env/aws output -json)
-EKS_CLUSTER_NAME=$(echo "$EKS_OUTPUTS" | jq -r '.cluster_name.value')
-EKS_REGION=$(echo "$EKS_OUTPUTS" | jq -r '.region.value' 2>/dev/null || echo "$BUCKET_REGION")
+EKS_CLUSTER_NAME=$(terraform -chdir=2-of-5_env/aws output -raw cluster_name)
+EKS_REGION=$(terraform -chdir=2-of-5_env/aws output -raw region 2>/dev/null || echo "$BUCKET_REGION")
 
 
 cat > 3-of-5_argocd/aws/cluster.tfvars <<EOF
@@ -96,9 +94,8 @@ EOF
 )
 
 # Capture AKS outputs and write them to a file for ArgoCD
-AKS_OUTPUTS=$(terraform -chdir=2-of-5_env/azure output -json)
-AKS_CLUSTER_NAME=$(echo "$AKS_OUTPUTS" | jq -r '.cluster_name.value')
-AKS_RESOURCE_GROUP=$(echo "AKS_OUTPUTS" | jq -r '.resource_group_name.value')
+AKS_CLUSTER_NAME=$(terraform -chdir=2-of-5_env/azure output -raw cluster_name)
+AKS_RESOURCE_GROUP=$(terraform -chdir=2-of-5_env/azure output -raw resource_group_name)
 
 cat > 3-of-5_argocd/azure/cluster.tfvars << EOF
 cluster_name            = "$AKS_CLUSTER_NAME"
